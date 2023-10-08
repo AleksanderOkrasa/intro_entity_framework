@@ -10,26 +10,70 @@ namespace SchoolApp
         {
             using (var db = new SchoolContext())
             {
-                /*
-                ShowStudents();
-                ShowTeachers();
+                int choice;
+                do
+                {
+                    Console.WriteLine("\nWybierz opcję:");
+                    Console.WriteLine("1 - Pokaż studentów");
+                    Console.WriteLine("2 - Pokaż nauczycieli");
+                    Console.WriteLine("3 - Dodaj studenta");
+                    Console.WriteLine("4 - Dodaj nauczyciela");
+                    Console.WriteLine("5 - Usuń studenta");
+                    Console.WriteLine("6 - Dodaj kurs");
+                    Console.WriteLine("7 - Aktualizuj kurs");
+                    Console.WriteLine("8 - Pokaż kursy");
+                    Console.WriteLine("9 - Pokaż szczegóły kursu");
+                    Console.WriteLine("0 - Wyjście");
+                    try
+                    {
+                        choice = Convert.ToInt32(Console.ReadLine());
+                    }
+                    catch (FormatException) 
+                    {
+                        Console.WriteLine("Wybór opcji jest sterowany cyframi!");
+                        choice = 99;
+                        continue;
+                    }
+                    switch (choice)
+                    {
+                        case 1:
+                            ShowStudents();
+                            break;
+                        case 2:
+                            ShowTeachers();
+                            break;
+                        case 3:
+                            AddStudent();
+                            break;
+                        case 4:
+                            AddTeacher();
+                            break;
+                        case 5:
+                            DeleteStudent();
+                            break;
+                        case 6:
+                            AddCourse();
+                            break;
+                        case 7:
+                            UpdateCourse();
+                            break;
+                        case 8:
+                            ShowCourses();
+                            break;
+                        case 9:
+                            ShowCourseDetail();
+                            break;
+                        case 0:
+                            Console.WriteLine("Zamykanie programu...");
+                            break;
+                        default:
+                            Console.WriteLine("Nieznana opcja");
+                            break;
+                    }
+                }
+                while (choice != 0);
 
-                AddStudent();
-                AddTeacher();
 
-                ShowTeachers();
-                ShowStudents();
-
-                UpdateStudent();
-                ShowStudents();
-
-                DeleteStudent();
-                ShowStudents();
-                */
-                AddCourse();
-                UpdateCourse();
-                ShowCourses();
-                ShowCourseDetail();
 
 
                 void AddTeacher()
@@ -76,20 +120,6 @@ namespace SchoolApp
                     foreach (var student in students)
                     {
                         Console.WriteLine(student.StudentId + ". " + student.Name);
-                    }
-                }
-
-                void UpdateStudent()
-                {
-                    ShowStudents();
-                    Console.WriteLine("Podaj ID studenta do aktualizacji:");
-                    int studentIdToUpdate = Convert.ToInt32(Console.ReadLine());
-                    var studentToUpdate = db.Students.Find(studentIdToUpdate);
-                    if (studentToUpdate != null)
-                    {
-                        Console.WriteLine("Podaj nowe imię i nazwisko:");
-                        studentToUpdate.Name = Console.ReadLine();
-                        db.SaveChanges();
                     }
                 }
 
