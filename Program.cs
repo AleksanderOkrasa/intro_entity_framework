@@ -16,13 +16,13 @@ namespace SchoolApp
                     Console.WriteLine("\nWybierz opcję:");
                     Console.WriteLine("1 - Pokaż studentów");
                     Console.WriteLine("2 - Pokaż nauczycieli");
-                    Console.WriteLine("3 - Dodaj studenta");
-                    Console.WriteLine("4 - Dodaj nauczyciela");
-                    Console.WriteLine("5 - Usuń studenta");
-                    Console.WriteLine("6 - Dodaj kurs");
-                    Console.WriteLine("7 - Aktualizuj kurs");
-                    Console.WriteLine("8 - Pokaż kursy");
-                    Console.WriteLine("9 - Pokaż szczegóły kursu");
+                    Console.WriteLine("3 - Pokaż kursy");
+                    Console.WriteLine("4 - Pokaż szczegóły kursu");
+                    Console.WriteLine("5 - Dodaj studenta");
+                    Console.WriteLine("6 - Dodaj nauczyciela");
+                    Console.WriteLine("7 - Dodaj kurs");
+                    Console.WriteLine("8 - Aktualizuj kurs");
+                    Console.WriteLine("9 - Usuń studenta");
                     Console.WriteLine("0 - Wyjście");
                     try
                     {
@@ -43,25 +43,25 @@ namespace SchoolApp
                             ShowTeachers();
                             break;
                         case 3:
-                            AddStudent();
-                            break;
-                        case 4:
-                            AddTeacher();
-                            break;
-                        case 5:
-                            DeleteStudent();
-                            break;
-                        case 6:
-                            AddCourse();
-                            break;
-                        case 7:
-                            UpdateCourse();
-                            break;
-                        case 8:
                             ShowCourses();
                             break;
-                        case 9:
+                        case 4:
                             ShowCourseDetail();
+                            break;
+                        case 5:
+                            AddStudent();
+                            break;
+                        case 6:
+                            AddTeacher();
+                            break;
+                        case 7:
+                            AddCourse();
+                            break;
+                        case 8:
+                            UpdateCourse();
+                            break;
+                        case 9:
+                            DeleteStudent();
                             break;
                         case 0:
                             Console.WriteLine("Zamykanie programu...");
