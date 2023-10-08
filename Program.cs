@@ -27,6 +27,7 @@ namespace SchoolApp
                 ShowStudents();
                 */
                 AddCourse();
+                UpdateCourse();
                 ShowCourses();
                 ShowCourseDetail();
 
@@ -72,6 +73,53 @@ namespace SchoolApp
                             db.SaveChanges();
                     }
                 }
+
+                void UpdateCourse()
+                {
+                    ShowCourses();
+                    Console.WriteLine("Podaj ID kursu do aktualizacji:");
+                    int courseIdToUpdate = Convert.ToInt32(Console.ReadLine());
+                    var courseToUpdate = db.Courses.Find(courseIdToUpdate);
+                    if (courseToUpdate != null)
+                    {
+                        Console.WriteLine("Podaj nową nazwę kursu (lub zostaw puste):");
+                        string newName = Console.ReadLine();
+                        if (!string.IsNullOrEmpty(newName))
+                        {
+                            courseToUpdate.Name = newName;
+                        }
+
+                        ShowTeachers();
+                        Console.WriteLine("Podaj ID nauczyciela prowadzącego kursu (lub zostaw puste):");
+                        try
+                        {
+                            int teacherId = Convert.ToInt32(Console.ReadLine());
+                            var teacherToUpdate = db.Teachers.Find(teacherId);
+                            
+                            if (teacherToUpdate != null)
+                            {
+                                courseToUpdate.Teacher = teacherToUpdate;
+                            }
+                        }
+                        catch (Exception ex) { }
+
+                        ShowStudents();
+                        Console.WriteLine("Podaj ID ucznia do dodania do kursu (możesz dodać kilku, oddzielając je przecinkami):");
+                        string[] studentIds = Console.ReadLine().Split(',');
+                        foreach (var id in studentIds)
+                        {
+                            int studentId = Convert.ToInt32(id);
+                            var studentToAdd = db.Students.Find(studentId);
+                            if (studentToAdd != null)
+                            {
+                                courseToUpdate.Students.Add(studentToAdd);
+                            }
+                        }
+
+                        db.SaveChanges();
+                    }
+                }
+
 
 
                 void AddTeacher()
