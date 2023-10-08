@@ -10,6 +10,7 @@ namespace SchoolApp
         {
             using (var db = new SchoolContext())
             {
+                /*
                 ShowStudents();
                 ShowTeachers();
 
@@ -24,6 +25,54 @@ namespace SchoolApp
 
                 DeleteStudent();
                 ShowStudents();
+                */
+                AddCourse();
+                ShowCourses();
+                ShowCourseDetail();
+
+                void AddCourse()
+                {
+                    Console.WriteLine("Podaj nazwę kursu:");
+                    string courseName = Console.ReadLine();
+                    ShowTeachers();
+                    Console.WriteLine("Podaj id nauczyciela prowadzącego kurs " + courseName);
+                    int teacherId = Convert.ToInt32(Console.ReadLine());
+                    var teacherToAdd = db.Teachers.Find(teacherId);
+
+                    var newCourse = new Course { Name = courseName, Teacher = teacherToAdd };
+
+                    db.Courses.Add(newCourse);
+                    db.SaveChanges();
+                }
+                
+                void ShowCourses()
+                {
+                    Console.WriteLine("Kursy:");
+                    var courses = db.Courses.ToList();
+                    foreach (var course in courses)
+                    {
+                        Console.WriteLine(course.CourseId + ". " + course.Name);
+                    }
+                }
+
+                void ShowCourseDetail()
+                {
+                    Console.WriteLine("Podaj ID kursu do wyświetlenia szczegółów:");
+                    int courseIdToFind = Convert.ToInt32(Console.ReadLine());
+                    var courseToShowDetail= db.Courses.Find(courseIdToFind);
+                    if (courseToShowDetail != null)
+                    {
+                        Console.WriteLine("Nazwa: " + courseToShowDetail.Name);
+                        Console.WriteLine("Nauczyciel: " + courseToShowDetail.Teacher.Name);
+                        Console.WriteLine("Studenci:");
+                        foreach (var student in courseToShowDetail.Students)
+                        {
+                            Console.WriteLine(student.StudentId + ". " + student.Name);
+                        }
+                            db.SaveChanges();
+                    }
+                }
+
 
                 void AddTeacher()
                 {
